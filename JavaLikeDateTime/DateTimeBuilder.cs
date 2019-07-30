@@ -52,6 +52,12 @@ namespace Cashwu.JavaLikeDateTime
             return this;
         }
 
+        public DateTimeBuilder Before(TimeSpan timeSpan)
+        {
+            _defaultDateTime = _defaultDateTime.Add(-timeSpan);
+            return this;
+        }
+
         public DateTime Build()
         {
             return _defaultDateTime;

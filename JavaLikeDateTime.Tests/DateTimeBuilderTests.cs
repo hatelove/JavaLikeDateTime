@@ -95,6 +95,24 @@ namespace JavaLikeDateTime.Tests
             ResultShouldBe(actual, new DateTime(2021, 1, 1));
         }
 
+        [Fact]
+        public void before_1_day()
+        {
+            var specificDate = new DateTime(2020, 9, 2);
+            var actual = DateTimeBuilder.InitBuilder(specificDate)
+                                        .Before(TimeSpan.FromDays(1)).Build();
+            ResultShouldBe(actual, new DateTime(2020, 9, 1));
+        }
+
+        [Fact]
+        public void before_1_day_to_last_month_end()
+        {
+            var specificDate = new DateTime(2020, 9, 1);
+            var actual = DateTimeBuilder.InitBuilder(specificDate)
+                                        .Before(TimeSpan.FromDays(1)).Build();
+            ResultShouldBe(actual, new DateTime(2020, 8, 31));
+        }
+
         private static void ResultShouldBe(DateTime actual, DateTime expected)
         {
             actual.Should().Be(expected);
