@@ -4,10 +4,7 @@ namespace Cashwu.JavaLikeDateTime
 {
     public class DateTimeBuilder
     {
-        private int? _day;
         private DateTime _defaultDateTime;
-        private int? _month;
-        private int? _year;
 
         private DateTimeBuilder(DateTime defaultDateTime)
         {
@@ -26,7 +23,7 @@ namespace Cashwu.JavaLikeDateTime
 
         public DateTimeBuilder AtDay(int day)
         {
-            _day = day;
+            _defaultDateTime = new DateTime(_defaultDateTime.Year, _defaultDateTime.Month, day);
             return this;
         }
 
@@ -39,20 +36,19 @@ namespace Cashwu.JavaLikeDateTime
 
         public DateTimeBuilder AtMonth(int month)
         {
-            _month = month;
+            _defaultDateTime = new DateTime(_defaultDateTime.Year, month, _defaultDateTime.Day);
             return this;
         }
 
         public DateTimeBuilder AtYear(int year)
         {
-            _year = year;
+            _defaultDateTime = new DateTime(year, _defaultDateTime.Month, _defaultDateTime.Day);
             return this;
         }
 
         public DateTime Build()
         {
-            return new DateTime(_year ?? _defaultDateTime.Year, _month ?? _defaultDateTime.Month,
-                                _day ?? _defaultDateTime.Day);
+            return _defaultDateTime;
         }
     }
 }
