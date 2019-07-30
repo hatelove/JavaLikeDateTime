@@ -63,6 +63,13 @@ namespace JavaLikeDateTime.Tests
             ResultShouldBe(actual, new DateTime(_specificDate.Year, SpecificMonth, _specificDate.Day));
         }
 
+        [Fact]
+        public void set_the_end_day_of_month()
+        {
+            var actual = DateTimeBuilder.InitBuilder(_specificDate).AtEndOfMonth().Build();
+            ResultShouldBe(actual, new DateTime(_specificDate.Year, _specificDate.Month, 30));
+        }
+
         private static void ResultShouldBe(DateTime actual, DateTime expected)
         {
             actual.Should().Be(expected);

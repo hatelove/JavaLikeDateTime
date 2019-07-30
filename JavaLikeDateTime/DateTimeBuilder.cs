@@ -4,8 +4,8 @@ namespace Cashwu.JavaLikeDateTime
 {
     public class DateTimeBuilder
     {
-        private readonly DateTime _defaultDateTime;
         private int? _day;
+        private DateTime _defaultDateTime;
         private int? _month;
         private int? _year;
 
@@ -27,6 +27,13 @@ namespace Cashwu.JavaLikeDateTime
         public DateTimeBuilder AtDay(int day)
         {
             _day = day;
+            return this;
+        }
+
+        public DateTimeBuilder AtEndOfMonth()
+        {
+            var endDayOfMonth = DateTime.DaysInMonth(_defaultDateTime.Year, _defaultDateTime.Month);
+            _defaultDateTime = new DateTime(_defaultDateTime.Year, _defaultDateTime.Month, endDayOfMonth);
             return this;
         }
 
