@@ -11,6 +11,7 @@ namespace JavaLikeDateTime.Tests
         private const int SpecificYear = 2019;
         private readonly DateTimeBuilder _dateTimeBuilder;
         private readonly ITestOutputHelper _testOutputHelper;
+        private readonly DateTime _specificDate = new DateTime(2020, 9, 1);
 
         public DateTimeBuilderTests(ITestOutputHelper testOutputHelper)
         {
@@ -32,14 +33,26 @@ namespace JavaLikeDateTime.Tests
             ResultShouldBe(actual, new DateTime(SpecificYear, 1, 1));
         }
 
-
         [Fact]
-        public void build_with_specific_month ()
+        public void build_with_specific_month()
         {
             var actual = _dateTimeBuilder.AtYear(SpecificYear).AtMonth(7).Build();
             ResultShouldBe(actual, new DateTime(SpecificYear, 7, 1));
         }
 
+        [Fact]
+        public void build_with_specific_day()
+        {
+            var actual = _dateTimeBuilder.AtYear(SpecificYear).AtMonth(7).AtDay(10).Build();
+            ResultShouldBe(actual, new DateTime(SpecificYear, 7, 10));
+        }
+
+        [Fact]
+        public void init_builder_with_specific_date()
+        {
+            var actual = DateTimeBuilder.InitBuilder(_specificDate).Build();
+            ResultShouldBe(actual, _specificDate);
+        }
 
         private static void ResultShouldBe(DateTime actual, DateTime expected)
         {
