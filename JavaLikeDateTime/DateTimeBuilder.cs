@@ -21,6 +21,12 @@ namespace Cashwu.JavaLikeDateTime
             return new DateTimeBuilder(defaultDate);
         }
 
+        public DateTimeBuilder After(TimeSpan timeSpan)
+        {
+            _defaultDateTime = _defaultDateTime.Add(timeSpan);
+            return this;
+        }
+
         public DateTimeBuilder AtDay(int day)
         {
             _defaultDateTime = new DateTime(_defaultDateTime.Year, _defaultDateTime.Month, day);

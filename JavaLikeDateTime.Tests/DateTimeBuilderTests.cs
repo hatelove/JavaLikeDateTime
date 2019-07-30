@@ -70,6 +70,31 @@ namespace JavaLikeDateTime.Tests
             ResultShouldBe(actual, new DateTime(_specificDate.Year, _specificDate.Month, 30));
         }
 
+        [Fact]
+        public void after_1_day()
+        {
+            var specificDate = new DateTime(2020, 9, 1);
+            var actual = DateTimeBuilder.InitBuilder(specificDate).After(TimeSpan.FromDays(1)).Build();
+            ResultShouldBe(actual, new DateTime(specificDate.Year, specificDate.Month, 2));
+        }
+
+        [Fact]
+        public void after_1_day_to_next_month()
+        {
+            var specificDate = new DateTime(2020, 9, 1);
+            var actual = DateTimeBuilder.InitBuilder(specificDate).AtEndOfMonth().After(TimeSpan.FromDays(1)).Build();
+            ResultShouldBe(actual, new DateTime(specificDate.Year, 10, 1));
+        }
+
+        [Fact]
+        public void after_1_day_to_next_year()
+        {
+            var specificDate = new DateTime(2020, 9, 1);
+            var actual = DateTimeBuilder.InitBuilder(specificDate).AtMonth(12).AtEndOfMonth()
+                                        .After(TimeSpan.FromDays(1)).Build();
+            ResultShouldBe(actual, new DateTime(2021, 1, 1));
+        }
+
         private static void ResultShouldBe(DateTime actual, DateTime expected)
         {
             actual.Should().Be(expected);
